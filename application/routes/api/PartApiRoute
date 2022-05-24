@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+
+const uniApiController = require('../../api/partAPI');
+
+router.get('/', uniApiController.getParts);
+router.get('/:idPart', uniApiController.getPartById);
+router.post('/', uniApiController.createPart);
+router.put('/:idPart', uniApiController.updatePart);
+router.delete('/:idPart', uniApiController.deletePart);
+module.exports = router;

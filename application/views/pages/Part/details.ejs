@@ -1,0 +1,48 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+    <h2> <%= __('part.form.details.pageTitle') %></h2>
+
+
+    <form >
+       
+        <input type="hidden" name="_id"  value="<%= part.idPart%>">
+
+        <label for="name"> <%= __('part.fields.name') %>:</label>
+        <input type="text" name="name" id="name" value="<%= part.name %>" disabled>
+        <span class="error-text" id="errorName"></span>
+        
+        <label for="availablePartQuantity"> <%= __('part.fields.avQuantity') %>:</label>
+        <input type="number" name="availablePartQuantity" id="availablePartQuantity" value="<%= part.availableQuantity %>" disabled>
+        <span class="error-text" id="errorAvailablePartQuantity"></span>
+        
+        <label for="price"> <%= __('part.fields.price') %>:</label>
+        <input type="number" name="price" id="price" value="<%= part.price %>" disabled>
+        <span class="error-text" id="errorPrice"></span>
+       
+        <label for="type"> <%= __('part.fields.type') %>:</label>
+        <input type="text" name="type" id="type" value="<%= part.type %>" disabled>
+        <span class="error-text" id="errorType"></span>
+        
+
+   <h3 class="inside-form-header"> <%= __('part.form.forUni') %></h3>
+
+                <label for="forBrand"> <%= __('uni.fields.brand') %>: </label>                 
+                <input type="text" name="forBrand" id="forBrand" value="<%= part.unicycle.brand %>" disabled>
+                <span class="error-text" id="errorForBrand"></span>
+                
+                <label for="forModel"> <%= __('uni.fields.model') %>: </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <input type="text" name="forModel" id="forModel" value="<%= part.unicycle.model %>" disabled>
+                <span class="error-text" id="errorForModel"></span> 
+    </form>
+    <% if(loggedUser){ %>
+    <p> <a class="form-details-button-edit" href="/parts/edit/<%= part.idPart%>"><i class="fas fa-edit"></i></a></p>
+    <% } %>
+    <p> <a class="form-details-button-return" href="/parts"><i class="fas fa-undo-alt"></i></a></p>
+
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

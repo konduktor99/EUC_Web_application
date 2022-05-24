@@ -1,0 +1,59 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+
+    <h2> <%= __('as.form.details.pageTitle') %></h2>
+
+   <form >
+       <label for="idAssembly"> <%= __('as.fields.id') %>: </label>
+       <input type="text" name="idAssembly" id="idAssembly" value="<%= assembly.idAssembly %>" disabled>
+       <span class="error-text" id="errorIdAssembly"></span>
+
+       <label for="assemblyPrice"> <%= __('as.fields.price') %>: </label>
+       <input type="number" name="assemblyPrice" id="assemblyPrice" value="<%= assembly.price %>" disabled>
+       <span class="error-text" id="errorAssemblyPrice"></span>
+
+       <label for="startDate"> <%= __('as.fields.startDate') %>: </label>
+       <input type="date" name="startDate" id="startDate" value="<%= assembly.startDate.toISOString().split('T')[0] %>" disabled>
+       <span class="error-text" id="errorStartDate"></span>
+    
+       <label for="endDate"> <%= __('as.fields.endDate') %>: </label>
+       <input type="date" name="endDate" id="endDate" value="<%= assembly.endDate.toISOString().split('T')[0] %>" disabled>
+       <span class="error-text" id="errorEndDate"></span>
+
+       <label for="clientName"> <%= __('as.fields.clientName') %>: </label>
+       <input type="text" name="clientName" id="clientName" value="<%= assembly.clientName %>" disabled>
+       <span class="error-text" id="errorClientName"></span>
+
+       <label for="partName"><%= __('as.fields.clientNumber') %>: </label>
+            <input type="text" id="clientNumber" name="clientNumber"  value="<%= assembly.clientNumber %>" placeholder="Wpisz maks. 9 znaków." disabled></input>   
+            <span class="error-text" id="errorClientNumber"></span>
+      
+       <label for="clientRemarks"> <%= __('as.fields.clientRemarks') %>: </label>
+       <textarea id="clientRemarks" name="clientRemarks" rows="4" cols="50" maxlength="100"  disabled><%= assembly.clientRemarks %></textarea>
+       <span class="error-text" id="errorClientRemarks"></span>   
+
+   </form>
+
+   <h3> <%= __('as.form.refersTo') %> </h3>
+   <form >
+    <label for="unicycleBrand"> <%= __('as.list.forUniBrand') %>: </label>
+    <input type="text" id="unicycleBrand" name="unicycleBrand" value="<%= assembly.unicycle.brand %>" disabled>
+    <span></span>
+
+    <label for="unicycleModel"> <%= __('as.list.forUniModel') %>: </label>
+    <input type="text" id="unicycleModel" name="unicycleModel" value="<%= assembly.unicycle.model %>" disabled>
+    <span></span>
+
+    <label for="partName"> <%= __('as.list.forPart') %>: </label>
+    <input type="text" id="partName" name="partName" value="<%= assembly.part.name %>" disabled>
+    <span></span>
+   </form>
+
+   <% if(loggedUser){ %>
+   <p> <a class="form-details-button-edit" href="/assemblies/edit/<%= assembly.idAssembly %>"><i class="fas fa-edit"></i></a></p>
+   <% } %>
+   <p> <a class="form-details-button-return" href="/assemblies"><i class="fas fa-undo-alt"></i></a></p>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

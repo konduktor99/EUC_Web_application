@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title> EKOŁO </title>
+     <link rel="stylesheet" href="../../css/style.css" />
+     <script type="application/javascript" src="../../js/validationCommon.js"></script>
+     <script type="application/javascript" src="<%= navLocation == 'uni' ? '../../js/validationUniForm.js' : ''%>"></script>
+     <script type="application/javascript" src="<%= navLocation == 'part' ? '../../js/validationPartForm.js' : ''%>"></script>
+     <script type="application/javascript" src="<%= navLocation == 'assem' ? '../../js/validationAssemForm.js' : ''%>"></script>
+     <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <script src="https://kit.fontawesome.com/c1c6f1b74e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+ 
+<header>
+<h1 class="system-name"><span class="name-part-1">EKO</span><span class="name-part-2">ŁO</span> <span class="name-part-3"> System</span></h1>
+
+
+<img src= "../../images/logoNinebot.png" alt=" EKOŁO Logo"/>
+
+<% if(!loggedUser) { %>
+    <div id="auth-narrow">
+        <h3><%= __('auth.headerLog') %></h3>
+       
+        <form class="form-auth-narrow" method="post" action="/login" novalidate>
+
+            <label for="login"><%= __('auth.login') %>:</label>
+            <input type="text" id="login" name="login">
+            <span ></span>
+
+            <label for="password"><%= __('auth.password') %>:</label>
+            <input type="password" id="password" name="password">
+            <span></span>
+
+            
+            <button type="submit" title="<%= __('auth.btnTitle') %>" id="form-button-submit" class="form-button-submit"  ><i class="fas fa-sign-in-alt" ></i></button>
+            <span id="loginErrors"><%= loginError ? loginError : ''%></span>
+        </form>
+    </div>
+
+    <div id="auth-narrow">
+        <h3><%= __('auth.headerReg') %></h3>
+       
+        <form class="form-auth-narrow" method="post" action="/register" novalidate>
+
+            <label for="login"><%= __('auth.login') %>:</label>
+            <input type="text" id="login" name="login">
+            <span ></span>
+
+            <label for="password"><%= __('auth.password') %>:</label>
+            <input type="password" id="password" name="password">
+            <span></span>
+
+            <button type="submit" title="<%= __('auth.btnTitle') %>" id="form-button-submit" class="form-button-submit"  ><i class="fas fa-marker" ></i></button>
+            <span id="loginErrors"> <%= registerError ? registerError : ''%> </span>
+
+        </form>
+    </div>
+<% } %>
+
+</header>
+
+<nav >
+
+<ul >
+    <li><a href="/"class="<%= navLocation == 'main' ? 'active' : ''%>"><%= __('nav.main-page') %> </a> </li>
+    <li><a href="/unicycles" class="<%= navLocation == 'uni' ? 'active' : ''%>"><%= __('nav.unicycles') %> </a> </li>
+    <li><a href="/parts" class="<%= navLocation == 'part' ? 'active' : ''%>"><%= __('nav.parts') %> </a> </li>
+    <li><a href="/assemblies" class="<%= navLocation == 'assem' ? 'active' : ''%>"><%= __('nav.assemblies') %> </a> </li>
+    <li ><a  href="/changeLang/pl" class="<%= lang == 'pl' ? 'activeLang' : ''%>">PL</a></li>
+    <li ><a  href="/changeLang/en" class="<%= lang == 'en' ? 'activeLang' : ''%>">EN</a></li>
+</ul>
+
+
+
+</nav>
+
+<!-- <nav class="nav-wide">
+
+    <ul >
+        <li><a href="/"class="<%= navLocation == 'main' ? 'active' : ''%>"><%= __('nav.main-page') %> </a> </li>
+        <li><a href="/unicycles" class="<%= navLocation == 'uni' ? 'active' : ''%>"><%= __('nav.unicycles') %> </a> </li>
+        <li><a href="/parts" class="<%= navLocation == 'part' ? 'active' : ''%>"><%= __('nav.parts') %> </a> </li>
+        <li><a href="/assemblies" class="<%= navLocation == 'assem' ? 'active' : ''%>"><%= __('nav.assemblies') %> </a> </li>
+       
+    </ul>
+
+    <ul > 
+        <li ><a  href="/changeLang/pl" class="<%= lang == 'pl' ? 'active' : ''%>">PL</a></li>
+        <li ><a  href="/changeLang/en" class="<%= lang == 'en' ? 'active' : ''%>">EN</a></li>
+    </ul>
+    </nav> -->
+

@@ -1,0 +1,113 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+    <h2> Dodaj usługę montażu</h2>
+
+
+    <form novalidate onchange="return validateForm();" onsubmit="return validateForm();">     
+
+            <!-- <label for="idAssembly"> Id Montażu: <span class="symbol-required">*</span> </label>
+            <input type="text" name="idAssembly" id="idAssembly" value="1" placeholder="Podaj unikalną wartość." required>
+            <span class="error-text" id="errorIdAssembly"></span> -->
+
+            <label for="assemblyPrice"> Cena: <span class="symbol-required">*</span> </label>
+            <input type="number" name="assemblyPrice" id="assemblyPrice" value="<%= assembly.price %>" placeholder="Podaj wartość w PLN." min="0" required>
+            <span class="error-text" id="errorAssemblyPrice"></span>
+
+            <label for="startDate"> Data rozpoczęcia: <span class="symbol-required">*</span></label>
+            <input type="date" name="startDate" id="startDate" value="<%= assembly.startDate.toISOString().split('T')[0] %>" required>
+            <span class="error-text" id="errorStartDate"></span>
+
+            <label for="endDate"> Data zakończenia: <span class="symbol-required">*</span> </label>
+            <input type="date" name="endDate" id="endDate" value="<%= assembly.endDate.toISOString().split('T')[0] %>" required>
+            <span class="error-text" id="errorEndDate"></span>
+
+            <label for="clientName"> Imie klienta: <span class="symbol-required">*</span> </label>
+            <input type="text" name="clientName" id="clientName" value="<%= assembly.clientName %>"placeholder="Wpisz maks. 25 znaków." required>
+            <span class="error-text" id="errorClientName" ></span>
+
+            <% if( formMode == 'edit') { %>
+                <h3 class="inside-form-header"> Dotyczy</h3>
+
+                <label for="unicycleBrand"> Firma monocykla: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle --> 
+                <select name="unicycleBrand" id="unicycleBrand" required>
+                <option selected value="<%= assembly.unicycle.brand %>"><%= part.unicycle.brand %></option>
+                <% for( let brand of uniBrands) {
+                    if(brand !=assembly.unicycle.brand){ %>
+                <option value="<%= brand %>"><%= brand %></option>
+                <% }} %>
+                </select> 
+                <span class="error-text" id="errorForBrand"></span>
+                
+                <label for="unicycleModel"> Model monocykla: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <select name="unicycleModel" id="unicycleModel" required>
+                <option selected value="<%= assembly.unicycle.model %>"><%= part.unicycle.model %></option>
+                <% for( let model of uniModels) {
+                    if(model !=assembly.unicycle.model){ %>
+                <option value="<%= model %>"><%= model %></option>
+                <% }} %>
+                </select> 
+                <span class="error-text" id="errorForModel"></span> 
+
+                <label for="partName"> Nazwa części: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <select name="partName" id="partName" required>
+                <option selected disabled  value="<%= assembly.part.name %>"> <%= assembly.part.name %> </option>
+                <% for( let name of partNames) { %>
+                    if(name !=assembly.part.name){ %>
+                <option value="<%= name %>"><%= name %></option>
+                <% }} %>
+                </select> 
+                <span class="error-text" id="errorPartName"></span>
+             <% }else{ %>
+
+                <label for="unicycleBrand"> Firma monocykla: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle --> 
+                <select name="unicycleBrand" id="unicycleBrand" required>
+                <option selected disabled value="">Wybierz firme monocykla</option>
+                <% for( let brand of uniBrands) { %>
+                <option value="<%= brand %>"><%= brand %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorForBrand"></span>
+                
+                <label for="unicycleModel"> Model monocykla: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <select name="unicycleModel" id="unicycleModel" required>
+                <option selected disabled  value=""> Wybierz model monocykla </option>
+                <% for( let model of uniModels) { %>
+                <option value="<%= model %>"><%= model %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorForModel"></span> 
+
+                <label for="partName"> Nazwa części: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <select name="partName" id="partName" required>
+                <option selected disabled  value=""> Wybierz nazwę części </option>
+                <% for( let name of partNames) { %>
+                <option value="<%= name %>"><%= name %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorPartName"></span> 
+
+             <% } %>                                                                  
+                        
+            <label for="clientNumber">Numer tel. klienta: <span class="symbol-required">*</span> </label>
+            <input type="text" id="clientNumber" name="clientNumber"  value="<%= assembly.clientNumber %>" placeholder="Wpisz maks. 9 znaków."></input>   
+            <span class="error-text" id="errorClientNumber"></span>
+
+            <label for="clientRemarks"> Uwagi klienta: </label>
+            <textarea id="clientRemarks" name="clientRemarks" rows="4" cols="50" maxlength="100" value="<%= assembly.clientRemarks %>" placeholder="Wpisz maks. 100 znaków."></textarea>  
+            <span class="error-text" id="errorClientRemarks"></span>
+
+
+            <p id="errorsSummary" class="errors-text"></p>
+            <div class="form-buttons">
+                <button type="submit" name="add" id="form-button-submit" class="form-button-submit" value="<%=formMode=='edit' ? 'submitted' : ''%>"><i class="fas fa-check"></i></button>
+                <a href="/assemblies" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>  
+
+   </form>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

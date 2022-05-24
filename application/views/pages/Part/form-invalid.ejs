@@ -1,0 +1,65 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+    <h2> Dodaj część</h2>
+
+    <form novalidate onsubmit="return validateForm();">     
+ 
+            <label for="name"> Nazwa Części: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="text" name="name" id="name" placeholder="Wpisz maks. 20 znaków." required>
+            <span class="error-text" id="errorName">Pole jest wymagane..</span>
+
+            <label for="availableQuantity"> Ilość dostępnych sztuk: <span class="symbol-required">*</span></label>
+            <input class="error-input" type="number" name="availableQuantity" id="availableQuantity" required>
+            <span class="error-text" id="errorAvailableQuantity">Pole jest wymagane..</span>
+
+            <label for="price"> Cena: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="number" name="price" id="price" min="0" placeholder="Podaj wartość w PLN." required>
+            <span class="error-text" id="errorPrice">Pole wymagane</span>
+        
+            <label for="type"> Typ: <span class="symbol-required">*</span></label>
+            <select class="error-input" name="type" id="type" required>
+                <option value=""> Wybierz typ części </option>
+                <option value="Obudowa">Obudowa</option>
+                <option value="Opona">Opona</option>
+                <option value="Dętka">Dętka</option>
+                </select> 
+            <span class="error-text" id="errorType">Pole wymagane</span>
+
+            <label for="brand"> Monocykl - firma: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle --> 
+            <select class="error-input" name="brand" id="brand" required>
+            <option value=""> Wybierz firmę </option>
+            <option value="Gotway">Gotway</option>
+            <option value="Inmotion">Inmotion</option>
+            <option value="King Song">King Song</option>
+            </select> 
+            <span class="error-text" id="errorBrand">Pole wymagane</span>
+            
+            <label for="model"> Monocykl - model: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+            <select class="error-input" name="model" id="model" required>
+            <option value=""> Wybierz model </option>
+            <option value="MCM5">MCM5</option>
+            <option value="MSX">MSX</option>
+            <option value="MSP">MSP</option>
+            </select> 
+            <span class="error-text" id="errorModel">Pole wymagane</span> 
+       
+            <div class="form-buttons">
+                <button type="submit" name="add" class="form-button-submit" ><i class="fas fa-check"></i></button>
+                <a href="../../pages/Part/list.html" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>     
+
+   </form>
+
+</main> 
+
+<footer>
+    Konrad Dusza S21516
+</footer>
+
+
+</body>
+
+</html>

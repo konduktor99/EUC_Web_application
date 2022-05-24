@@ -1,0 +1,153 @@
+
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+
+    <h2> <%= pageTitle %></h2>
+
+
+    <div style="display: none">
+        <span class="error-text" id="errorMessage-required"><%= __('validationMessage.fieldRequired') %></span>
+     </div>
+     <div style="display: none">
+        <span class="error-text" id="errorMessage-10signs"><%= __('validationMessage.10signs') %></span>
+     </div>
+     <div style="display: none">
+        <span class="error-text" id="errorMessage-sum"><%= __('validationMessage.sum') %></span>
+     </div>
+
+
+    <!-- <% if( formMode == 'edit') { %>
+
+    <form novalidate method="POST" onchange=" return validateForm(); " action="<%= formAction %>"  onsubmit=" return validateForm() " >
+    <% } else{ %>
+    <form novalidate method="POST" onchange=" return validateForm(); " action="<%= formAction %>"  onsubmit="  setSubmitted(); return validateForm() ">
+    <% } %>     -->
+    <% if( formMode == 'edit') { %>
+
+        <form novalidate method="POST"  onchange=" return validateForm(); "   action="<%= formAction %>"   >
+        <% } else{ %>
+        <form novalidate method="POST" onchange=" return validateForm();"     action="<%= formAction %>"  >
+        <% } %>    
+     
+            <input type="hidden" name="idUnicycle"  value="<%= uni.idUnicycle%>">
+
+            <label for="brand"> <%= __('uni.fields.brand') %>: <span class="symbol-required">*</span> </label>
+            <input type="text" name="brand" id="brand" value="<%= uni.brand %>" placeholder="<%= __('uni.form.maxCharPH') %>" class="<%= validationErrors.find(e=>e.path.includes('brand'))? 'error-input' : defaultInputStyle %>"   >
+            <span class="error-text" id="errorBrand">
+            <% if (validationErrors.find(e=>e.path.includes('brand'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('brand')).message %>
+            <% } %>
+            </span>
+
+
+            <label for="model"> <%= __('uni.fields.model') %>: <span class="symbol-required">*</span> </label>
+            <input type="text" name="model" id="model" value="<%= uni.model %>" placeholder= "<%= __('uni.form.maxCharPH') %>" class="<%= validationErrors.find(e=>e.path.includes('model'))? 'error-input' : defaultInputStyle %>" >
+            <span class="error-text" id="errorModel">
+                <% if (validationErrors.find(e=>e.path.includes('model'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('model')).message %>
+                <% } %>
+            </span>
+
+            <label for="price"> <%= __('uni.fields.price') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="price" id="price" min="0" value="<%= uni.price %>" placeholder="<%= __('uni.form.pricePLNPH') %>" class="<%= validationErrors.find(e=>e.path.includes('price'))? 'error-input' : defaultInputStyle %>" >
+            <span class="error-text" id="errorPrice">
+                <% if (validationErrors.find(e=>e.path.includes('price'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('price')).message %>
+                <% } %>
+            </span>
+            
+            <label for="availableQuantity"> <%= __('uni.fields.avQuantity') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="availableQuantity" id="availableQuantity" min="0" value="<%= uni.availableQuantity %>" class="<%= validationErrors.find(e=>e.path.includes('availableQuantity'))? 'error-input' : defaultInputStyle %>" >
+            <span class="error-text" id="errorAvailableQuantity">
+                <% if (validationErrors.find(e=>e.path.includes('availableQuantity'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('availableQuantity')).message %>
+                <% } %>
+            </span>
+
+            <label for="motorPower"> <%= __('uni.fields.mPower') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="motorPower" id="motorPower" value="<%= uni.motorPower %>"  class="<%= validationErrors.find(e=>e.path.includes('motorPower'))? 'error-input' : defaultInputStyle %>" >
+            <span class="error-text" id="errorMotorPower">
+                <% if (validationErrors.find(e=>e.path.includes('motorPower'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('motorPower')).message %>
+                <% } %>
+            </span>
+
+            <label for="batteryCapacity"> <%= __('uni.fields.battery') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="batteryCapacity" id="batteryCapacity" min="0" step="20" value="<%= uni.batteryCapacity %>"  class="<%= validationErrors.find(e=>e.path.includes('batteryCapacity'))? 'error-input' : defaultInputStyle %>" >
+            <span class="error-text" id="errorBatteryCapacity">
+                <% if (validationErrors.find(e=>e.path.includes('batteryCapacity'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('batteryCapacity')).message %>
+                <% } %>
+            </span>
+
+            <label for="tireDiameter"> <%= __('uni.fields.tireDiameter') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="tireDiameter" id="tireDiameter" min="10" value="<%= uni.tireDiameter %>" placeholder="<%= __('uni.form.minDiameterPH') %>" class="<%= validationErrors.find(e=>e.path.includes('tireDiameter'))? 'error-input' : defaultInputStyle %>" >
+            <span class="error-text" id="errorTireDiameter">
+                <% if (validationErrors.find(e=>e.path.includes('tireDiameter'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('tireDiameter')).message %>
+                <% } %>
+            </span>
+
+            <label for="waterproofRating"> <%= __('uni.fields.waterproofRat') %>: </label>
+            <select name="waterproofRating" id="waterproofRating" class=<%= defaultInputStyle %>>
+                <option value="<%= uni.waterproofRating %>" selected ><%= uni.waterproofRating ? uni.waterproofRating : __('uni.form.selectWaterproofPH') %></option>
+                <option value="IP54">IP54</option>
+                <option value="IPX5">IPX5</option>
+                <option value="IPX7">IPX7</option>
+                <option value="IP55">IP55</option>
+                <option value="IP65">IP65</option>
+                <option value="IP66">IP66</option>
+            </select>   
+            <span class="error-text" id="errorWaterproofRating">
+                <% if (validationErrors.find(e=>e.path.includes('waterp'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('availableQuantity')).message %>
+                <% } %>
+            </span>
+            <p id="errorsSummary" class="errors-text"></p>
+            <div class="form-buttons">
+                <button type="submit" name="add" id="form-button-submit" class="form-button-submit"  value="<%=formMode=='edit' ? 'validate' : submittedFirstTime %>"><i class="fas fa-check" ></i></button>
+                <a href="/unicycles" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>     
+</form>
+
+
+<% if( formMode == 'edit') { %>
+
+    <div class="uni-parts" >
+    <h3> <%= __('uni.form.avParts') %></h3>
+
+    <% if(! (uni.parts.length == 0) ) { %>
+
+        <table class="table-list">
+        <thead>
+            <tr>
+                <th> <%= __('parts.fields.name') %> </th>
+                <th> <%= __('parts.fields.price') %> </th>
+                <th> <%= __('parts.fields.avQuantity') %> </th>
+            </tr>   
+        </thead>
+        <tbody>
+
+            <% for( let p of uni.parts) { %>
+
+            <tr>
+                <td> <a class="to-details" href="/parts/details/<%= p.idPart %>"> <%= p.name %> </a> </td>
+                <td> <%= p.price %> </td>
+                <td> <%= p.availableQuantity %> </td>
+            </tr>
+            
+            <% } %>
+
+        </tbody>
+    </table>
+    <% }else{ %>
+        <p> <%= __('uni.form.noAvParts') %></p>
+    <% } %>
+  
+    </div>
+ <% } %>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

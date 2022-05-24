@@ -1,0 +1,169 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+
+    <h2> <%= pageTitle =='Dodaj usługę montażu'? __('as.form.add.pageTitle') : __('as.form.edit.pageTitle')  %></h2>
+
+
+    <% if( formMode == 'edit') { %>
+
+        <form novalidate method="POST"  onchange=" return validateForm(); "   action="<%= formAction %>"   >
+        <% } else{ %>
+        <form novalidate method="POST" onchange=" return validateForm();"     action="<%= formAction %>"  >
+        <% } %>     
+
+
+        <div style="display: none">
+            <span class="error-text" id="errorMessage-required"><%= __('validationMessage.fieldRequired') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-25signs"><%= __('validationMessage.25signs') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-9signs"><%= __('validationMessage.9signs') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-price"><%= __('validationMessage.price') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-dateFormat"><%= __('validationMessage.dateFormat') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-datePast"><%= __('validationMessage.datePast') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-dateBefore"><%= __('validationMessage.dateBefore') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-sum"><%= __('validationMessage.sum') %></span>
+         </div>
+
+            <!-- <label for="idAssembly"> Id Montażu: <span class="symbol-required">*</span> </label>
+            <input type="text" name="idAssembly" id="idAssembly" value="1" placeholder="Podaj unikalną wartość." required>
+            <span class="error-text" id="errorIdAssembly"></span> -->
+
+            <input type="hidden" name="idAssembly"  value="<%= assembly.idAssembly%>">
+
+            <label for="assemblyPrice"> <%= __('as.fields.price') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="assemblyPrice" id="assemblyPrice" value="<%= assembly.price %>" placeholder="<%= __('as.form.pricePLNPH') %>" min="0" class="<%= validationErrors.find(e=>e.path.includes('price'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorAssemblyPrice">
+            <% if (validationErrors.find(e=>e.path.includes('price'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('price')).message %>
+            <% } %>
+            </span>
+
+            <label for="startDate"> <%= __('as.fields.startDate') %>: <span class="symbol-required">*</span></label>
+            <input type="date" name="startDate" id="startDate" value="<%= assembly.startDate instanceof Date ?  assembly.startDate.toISOString().split('T')[0] : assembly.startDate  %>" class="<%= validationErrors.find(e=>e.path.includes('startDate'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorStartDate">
+            <% if (validationErrors.find(e=>e.path.includes('startDate'))){ %>
+                   <%= validationErrors.find(e=>e.path.includes('startDate')).message %>
+            <% } %>
+            </span>
+
+            <label for="endDate"> <%= __('as.fields.endDate') %>: <span class="symbol-required">*</span> </label>
+            <input type="date" name="endDate" id="endDate" value="<%= assembly.endDate instanceof Date ?  assembly.endDate.toISOString().split('T')[0] : assembly.endDate %>" class="<%= validationErrors.find(e=>e.path.includes('endDate'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorEndDate">
+            <% if (validationErrors.find(e=>e.path.includes('endDate'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('endDate')).message %>
+             <% } %>
+            </span>
+
+            <label for="clientName"> <%= __('as.fields.clientName') %>: <span class="symbol-required">*</span> </label>
+            <input type="text" name="clientName" id="clientName" value="<%= assembly.clientName %>"placeholder="<%= __('as.form.max25CharPH') %>" class="<%= validationErrors.find(e=>e.path.includes('clientName'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorClientName" >
+            <% if (validationErrors.find(e=>e.path.includes('clientName'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('clientName')).message %>
+             <% } %>
+            </span>
+
+            <label for="clientNumber"><%= __('as.fields.clientNumber') %>: <span class="symbol-required">*</span> </label>
+            <input type="text" id="clientNumber" name="clientNumber"  value="<%= assembly.clientNumber %>" placeholder=<%= __('as.form.max9CharPH') %> class="<%= validationErrors.find(e=>e.path.includes('clientNumber'))? 'error-input' : defaultInputStyle %>"></input>   
+            <span class="error-text" id="errorClientNumber">
+            <% if (validationErrors.find(e=>e.path.includes('clientNumber'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('clientNumber')).message %>
+             <% } %>
+            </span>
+
+            <label for="clientRemarks"> <%= __('as.fields.clientRemarks') %>: </label>
+            <textarea id="clientRemarks" name="clientRemarks" rows="4" cols="50" maxlength="100"  placeholder="<%= __('as.form.max100CharPH') %>" class=" defaultInputStyle "><%= assembly.clientRemarks %></textarea>  
+            <span class="error-text" id="errorClientRemarks">
+            <% if (validationErrors.find(e=>e.path.includes('clientRemarks'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('clientRemarks')).message %>
+             <% } %>
+            </span>
+
+
+            <% if( formMode == 'edit' || formMode == 'addAfterReject') { %>
+                <h3 class="inside-form-header"> <%= __('as.form.refersTo') %> </h3>
+
+                <label for="unicycle"> <%= __('as.form.forUniName') %>:  </label>                        
+                <select name="unicycle" id="unicycle" class="<%= validationErrors.find(e=>e.path.includes('idUnicycle'))? 'error-input' : defaultInputStyle %>">
+                <% for( let uni of unis) { %>
+                <option <%= uni.idUnicycle==assembly.unicycle.idUnicycle ? 'selected':'' %> value="<%= uni.idUnicycle %>"><%= uni.brand+' '+uni.model %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorUnicycle">
+                <% if (validationErrors.find(e=>e.path.includes('idUnicycle'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('idUnicycle')).message %>
+                <% } %>
+                </span>
+                
+                <label for="partName"> <%= __('as.form.forPartName') %>: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <select name="partName" id="partName" class="<%= validationErrors.find(e=>e.path.includes('idPart'))? 'error-input' : defaultInputStyle %>">
+                <% for( let part of parts) { %>
+                <option <%= part.idPart ==assembly.part.idPart ? 'selected':'' %> value="<%=part.idPart%>"><%= part.name %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorPartName">
+                <% if (validationErrors.find(e=>e.path.includes('idPart'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('idPart')).message %>
+                <% } %>
+                </span>
+                
+             <% }else{ %>
+
+                <label for="unicycle"> <%= __('as.form.forUniName') %>: <span class="symbol-required">*</span> </label>                        
+                <select name="unicycle" id="unicycle" class="<%= validationErrors.find(e=>e.path.includes('idUnicycle'))? 'error-input' : defaultInputStyle %>">
+                <option selected value=""> <%= __('as.form.selectUniPH') %> </option>
+                <% for( let uni of unis) { %>
+                    <option value="<%= uni.idUnicycle %>"><%= uni.brand+' '+uni.model %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorUnicycle">
+                <% if (validationErrors.find(e=>e.path.includes('idUnicycle'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('idUnicycle')).message %>
+                <% } %>
+                </span>
+
+                <label for="partName"> <%= __('as.form.forPartName') %>: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+                <select name="partName" id="partName" class="<%= validationErrors.find(e=>e.path.includes('idPart'))? 'error-input' : defaultInputStyle %>">
+                <option selected  value=""> <%= __('as.form.selectPartPH') %> </option>
+                <% for( let part of parts) { %>
+                    <option value="<%=part.idPart%>"><%= part.name %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorPartName">
+                <% if (validationErrors.find(e=>e.path.includes('idPart'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('idPart')).message %>
+                <% } %>
+                </span> 
+                
+               
+             <% } %>
+
+                                        
+                        
+           
+            <p id="errorsSummary" class="errors-text"></p>
+            <div class="form-buttons">
+                <button type="submit" name="add" id="form-button-submit" class="form-button-submit" value="<%=formMode=='edit' ? 'validate' : submittedFirstTime %>"><i class="fas fa-check"></i></button>
+                <a href="/assemblies" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>  
+
+   </form>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

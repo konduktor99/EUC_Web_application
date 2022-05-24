@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title> EKOŁO </title>
+     <link rel="stylesheet" href="../../CSS/style.css" />
+     <script src="https://kit.fontawesome.com/c1c6f1b74e.js" crossorigin="anonymous"></script>
+     <script type="application/javascript" src="../../js/validationCommon.js"></script>
+     <script type="application/javascript" src="../../js/validationAssemForm.js"></script>
+</head>
+
+<body>
+
+<header>
+<h1 class="system-name"><span class="name-part-1">EKO</span><span class="name-part-2">ŁO</span> <span class="name-part-3"> System</span></h1>
+ <link rel="stylesheet" href="../../CSS/style.css" />
+<img src= "../../images/logoNinebot.png" alt=" EKOŁO Logo">
+
+</header>
+
+<nav>
+
+<ul>
+    <li><a href="../../index.html">Strona Główna </a> </li>
+    <li><a href="../../pages/Unicycle/list.html">Monocykle </a> </li>
+    <li><a href="../../pages/Part/list.html">Części </a> </li>
+    <li><a href="../../pages/Assembly/list.html" class="active">Montaż </a> </li>
+</ul>
+
+</nav>
+
+<main>
+
+    <h2> Dodaj usługę montażu</h2>
+
+
+    <form>
+            <label for="idAssembly"> Id Montażu: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="text" name="idAssembly" id="idAssembly" placeholder="Podaj unikalną wartość." required>
+            <span class="error-text" id="errorIdAssembly">Pole wymagane</span>
+
+            <label for="price"> Cena: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="number" name="price" id="price" placeholder="Podaj wartość w PLN." required>
+            <span class="error-text" id="errorPrice">Pole opcjonalne</span>
+
+            <label for="startDate"> Data rozpoczęcia: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="date" name="startDate" id="startDate">
+            <span class="error-text" id="errorStartDate">Pole wymagane</span>
+
+            <label for="endDate"> Data zakończenia: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="date" name="endDate" id="endDate" required>
+            <span class="error-text" id="errorEndDate">Pole wymagane</span>
+
+            <label for="clientName"> Imie klienta: <span class="symbol-required">*</span> </label>
+            <input class="error-input" type="text" name="clientName" id="clientName" placeholder="Wpisz maks. 25 znaków." required>
+            <span class="error-text" id="errorClientName">Pole wymagane</span>
+
+            <label for="brand"> Firma: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle --> 
+            <select class="error-input" name="brand" id="brand" required>
+                <option value="" disabled selected> Wybierz firmę </option>
+                <option value="2">Gotway</option>
+                <option value="3">Inmotion</option>
+                <option value="4">King Song</option>
+            </select>  
+            <span class="error-text" id="errorBrand">Pole wymagane</span>
+            
+            <label for="model"> Model: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+            <select class="error-input" name="model" id="model" required>
+                <option value="" disabled selected> Wybierz model</option>
+                <option value="2">MCM5</option>
+                <option value="3">MSX</option>
+                <option value="4">MSP</option>
+            </select>
+            <span class="error-text" id="errorModel">Pole wymagane</span>                                                                                 
+                        
+            <label for="partName"> Nazwa części: <span class="symbol-required">*</span> </label>              <!--Odpowiednik pola z tabeli Part --> 
+            <select class="error-input" name="partName" id="partName" required>
+                <option value="" disabled selected> Wybierz część</option>
+                <option value="2" disabled>Obudowa wewnętrzna</option>
+                <option value="3">Obudowa zewnętrzna</option>
+                <option value="4">rączka</option>
+            </select>
+            <span class="error-text" id="errorPartName">Pole wymagane</span>
+
+            <label for="clientRemarks"> Uwagi klienta: </label>
+            <textarea  id="clientRemarks" name="clientRemarks" rows="4" cols="50" maxlength="100" placeholder="Wpisz maks. 100 znaków."></textarea>  
+            <span class="error-text" id="errorClientRemarks">Pole opcjonalne</span>
+            
+
+            <p id="errorsSummary" class="errors-text">Formularz zawiera błedy.</p>
+            <div class="form-buttons">
+                <button type="submit" name="add" class="form-button-submit" ><i class="fas fa-check"></i></button>
+                <a href="../../pages/Part/list.html" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>     
+
+   </form>
+
+</main>
+
+<footer>
+    Konrad Dusza S21516
+</footer>
+
+
+</body>
+
+</html>

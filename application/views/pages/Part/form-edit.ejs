@@ -1,0 +1,74 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+    <h2> <%= pageTitle %></h2>
+
+
+    <% if( formMode == 'edit') { %>
+
+        <form novalidate onchange=" return validateForm(); " action="<%= formAction %>"  onsubmit=" return validateForm() " >
+        <% } else{ %>
+        <form novalidate onchange=" return validateForm(); " action="<%= formAction %>"  onsubmit="  setSubmitted(); return validateForm() ">
+        <% } %>  
+
+            <input type="hidden" name="_id"  value="<%= part.idPart%>">
+
+            <label for="name"> Nazwa Części: <span class="symbol-required">*</span> </label>
+            <input type="text" name="name" id="name" value="<%= part.name%>" placeholder="Wpisz maks. 20 znaków." required>
+            <span class="error-text" id="errorName"></span>
+
+            <label for="availablePartQuantity"> Ilość dostępnych sztuk: <span class="symbol-required">*</span></label>
+            <input type="number" name="availablePartQuantity" id="availablePartQuantity" min="0" value="<%= part.availableQuantity%>" required>
+            <span class="error-text" id="errorAvailablePartQuantity"></span>
+
+            <label for="price"> Cena: <span class="symbol-required">*</span> </label>
+            <input type="number" name="price" id="price" min="0" value="<%= part.price%>" placeholder="Podaj wartość w PLN."  required>
+            <span class="error-text" id="errorPrice"></span>
+        
+            <label for="type"> Typ: <span class="symbol-required">*</span></label>
+            <select name="type" id="type" required>
+                <option value="<%= part.type%>"> <%= part.type ? part.type : 'Wybierz typ części' %> </option>
+                <option value="obudowa">obudowa</option>
+                <option value="opona">opona</option>
+                <option value="uchwyt">uchwyt</option>
+                <option value="błotnik">błotnik</option>
+                <option value="bumper">bumper</option>
+                </select> 
+            <span class="error-text" id="errorType"></span>
+
+            <h3> Do monocykla</h3>
+
+             <label for="forBrand"> Monocykl - firma: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle --> 
+             <select name="forBrand" id="forBrand" required>
+             <option value="<%= part.unicycle.brand%>"></option>"><%= part.unicycle.brand ? part.unicycle.brand : 'Wybierz firme monocykla' %></option>
+             <% for( let u of part.unis) { %>
+             <option value="<%= u.brand %>"><%= u.brand %></option>
+             <% } %>
+             </select> 
+             <span class="error-text" id="errorForBrand"></span>
+             
+             <label for="forModel"> Monocykl - model: <span class="symbol-required">*</span> </label>                        <!--Odpowiednik pola z tabeli Unicycle -->      <!-- na podstawie tych 3 pól będzie znajdowany odpowiedni rekord w tabeli UnicyclePart i jego klucz będzie zapisywany w tabeli AssemblyOfPart-->
+             <select name="forModel" id="forModel" required>
+             <option value="<%= part.unicycle.model %>"></option>"><%= part.unicycle.model ? part.unicycle.model : 'Wybierz model monocykla' %></option>
+             <% for( let u of part.unis) { %>
+             <option value="<%= u.model %>"><%= u.model %></option>
+             <% } %>
+             </select> 
+             <span class="error-text" id="errorForModel"></span> 
+            
+             
+            <p id="errorsSummary" class="errors-text"></p>
+            <div class="form-buttons">
+                <button type="submit" name="add" id="form-button-submit" class="form-button-submit" value="<%=formMode=='edit' ? 'submitted' : ''%>"><i class="fas fa-check"></i></button>
+                <a href="/parts" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>     
+   </form>
+
+  
+
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,115 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+    <h2>  <%= pageTitle =='Dodaj część'? __('part.form.add.pageTitle') : __('part.form.edit.pageTitle')   %></h2>
+
+
+    <% if( formMode == 'edit') { %>
+
+        <form novalidate method="POST"  onchange=" return validateForm(); "   action="<%= formAction %>"   >
+        <% } else{ %>
+        <form novalidate method="POST" onchange=" return validateForm();"     action="<%= formAction %>"  >
+        <% } %>   
+
+        <div style="display: none">
+            <span class="error-text" id="errorMessage-required"><%= __('validationMessage.fieldRequired') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-20signs"><%= __('validationMessage.20signs') %></span>
+         </div>
+         <div style="display: none">
+            <span class="error-text" id="errorMessage-sum"><%= __('validationMessage.sum') %></span>
+         </div>
+
+         
+            <input type="hidden" name="idPart"  value="<%= part.idPart%>">
+            
+
+            <label for="name"> <%= __('part.fields.name') %>: <span class="symbol-required">*</span> </label>
+            <input type="text" name="name" id="name" value="<%= part.name%>" placeholder="<%= __('part.form.maxCharPH') %>" class="<%= validationErrors.find(e=>e.path.includes('name'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorName">
+            <% if (validationErrors.find(e=>e.path.includes('name'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('name')).message %>
+            <% } %>
+            </span>
+
+            <label for="availablePartQuantity"> <%= __('part.fields.avQuantity') %>: <span class="symbol-required">*</span></label>
+            <input type="number" name="availablePartQuantity" id="availablePartQuantity" min="0" value="<%= part.availableQuantity%>" class="<%= validationErrors.find(e=>e.path.includes('availableQuantity'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorAvailablePartQuantity">
+            <% if (validationErrors.find(e=>e.path.includes('availableQuantity'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('availableQuantity')).message %>
+            <% } %>
+            </span>
+
+            <label for="price"> <%= __('part.fields.price') %>: <span class="symbol-required">*</span> </label>
+            <input type="number" name="price" id="price" min="0" value="<%= part.price%>" placeholder="<%= __('part.form.pricePLNPH') %>"  class="<%= validationErrors.find(e=>e.path.includes('price'))? 'error-input' : defaultInputStyle %>">
+            <span class="error-text" id="errorPrice">
+            <% if (validationErrors.find(e=>e.path.includes('price'))){ %>
+                <%= validationErrors.find(e=>e.path.includes('price')).message %>
+            <% } %>
+            </span>
+        
+            <label for="type"> <%= __('part.fields.type') %>: <span class="symbol-required">*</span></label>
+            <select name="type" id="type" class="<%= validationErrors.find(e=>e.path.includes('type'))? 'error-input' : defaultInputStyle %>">
+                <option value="<%= part.type%>"> <%= part.type ? part.type : __('part.form.selectTypePH') %> </option>
+                <option value="obudowa"><%= __('part.fields.types.shell') %></option>
+                <option value="opona"><%= __('part.fields.types.tire') %></option>
+                <option value="uchwyt"><%= __('part.fields.types.handle') %></option>
+                <option value="błotnik"><%= __('part.fields.types.mudguard') %></option>
+                <option value="bumper"><%= __('part.fields.types.bumper') %></option>
+                <option value="pedały"><%= __('part.fields.types.footPlate') %></option>
+                </select> 
+            <span class="error-text" id="errorType">
+                <% if (validationErrors.find(e=>e.path.includes('type'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('type')).message %>
+                <% } %>
+            </span>
+
+            <% if( formMode == 'edit' || formMode == 'addAfterReject') { %>
+                <h3 class="inside-form-header"> Dedykowana do monocykla</h3>
+
+                <label for="forUnicycle"> <%= __('part.form.forUniName') %>:  </label>                        
+                <select name="forUnicycle" id="forUnicycle" class="<%= validationErrors.find(e=>e.path.includes('forUnicycle'))? 'error-input' : defaultInputStyle %>">
+                <option value=""><%= part.unicycle.idUnicycle ? '-':__('part.form.selectUniPH') %></option>
+                <% for( let uni of unis) { %>
+                <option <%= uni.idUnicycle ==part.unicycle.idUnicycle ? 'selected':'' %> value="<%= uni.idUnicycle %>"><%= uni.brand+' '+uni.model %></option>
+                
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorForUnicycle">
+                <% if (validationErrors.find(e=>e.path.includes('forUnicycle'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('forUnicycle')).message %>
+                <% } %>
+                </span>  
+                
+             <% }else{ %>
+
+                <label for="forUnicycle"> <%= __('part.form.forUniName') %>:  </label>                        
+                <select name="forUnicycle" id="forUnicycle" class="<%= validationErrors.find(e=>e.path.includes('forUnicycle'))? 'error-input' : defaultInputStyle %>">
+                <option selected value=""><%= __('part.form.selectUniPH') %> </option>
+                <% for( let uni of unis) { %>
+                    <option value="<%= uni.idUnicycle %>"><%= uni.brand+' '+uni.model %></option>
+                <% } %>
+                </select> 
+                <span class="error-text" id="errorForUnicycle">
+                <% if (validationErrors.find(e=>e.path.includes('forUnicycle'))){ %>
+                    <%= validationErrors.find(e=>e.path.includes('forUnicycle')).message %>
+                <% } %>    
+                </span>
+                
+               
+             <% } %>
+             
+            <p id="errorsSummary" class="errors-text"></p>
+            <div class="form-buttons">
+                <button type="submit" name="add" id="form-button-submit" class="form-button-submit" value="<%=formMode=='edit' ? 'validate' : submittedFirstTime %>"><i class="fas fa-check"></i></button>
+                <a href="/parts" class="form-button-cancel"><i class="fas fa-times"></i></a>  
+            </div>     
+        </form>
+
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

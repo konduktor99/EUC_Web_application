@@ -1,0 +1,198 @@
+{
+	"validationMessage": {
+		"fieldRequired": "Pole jest wymagane",
+		"25signs": "Pole powinno zawierać maks. 25 znaków.",
+		"20signs": "Pole powinno zawierać maks. 20 znaków.",
+		"9signs": "Pole powinno zawierać maks. 9 znaków.",
+		"10signs": "Pole powinno zawierać maks. 10 znaków.",
+		"price": "Cena powinna być większa od 0 zł i mniejsza od 10000 zł.",
+		"dateFormat": "Data musi być w formacie dd-mm-rrrr.",
+		"dateBefore": "Data rozpoczęcia powinna być przed datą zakończenia.",
+		"datePast": "Data powinna być z przeszłości.",
+		"sum": "Formularz zawiera błędy"
+	},
+	"main-page": {
+		"header": "Strona główna",
+		"content": "Ekoło system to narzędzie wspomagające pracowników firmy Ekoło w ewidencji stanu magazynu dotyczącego  monocykli elektrycznych, części do nich oraz usług montażu tychże komponentów. Znajdziesz tutaj możliwość sprawowania pełnej kontroli nad danymi tj. odczytu, dodawania, edycji i usuwania. Miłej pracy!"
+	},
+	"nav": {
+		"main-page": "Strona główna",
+		"unicycles": "Monocykle",
+		"parts": "Części",
+		"assemblies": "Montaż"
+	},
+	"auth": {
+		"headerLog": "Logowanie",
+		"headerReg": "Rejestracja",
+		"login": "Login",
+		"password": "Hasło",
+		"btnTitle": "zaloguj",
+		"welcome": "Witaj,"
+	},
+	"list": {
+		"actions": {
+			"title": "Akcje",
+			"details": "Szczegóły",
+			"edit": "Edytuj",
+			"delete": "Usuń"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Powrót",
+			"edit": "Edytuj",
+			"cancel": "Anuluj"
+		}
+	},
+	"uni": {
+		"fields": {
+			"brand": "Firma",
+			"model": "Model",
+			"price": "Cena",
+			"avQuantity": "Liczba sztuk",
+			"mPower": "Moc silnika (W)",
+			"battery": "Bateria",
+			"tireDiameter": "Średnica koła (in)",
+			"waterproofRat": "Klasa wodoodporności"
+		},
+		"list": {
+			"title": "Monocykle w magazynie",
+			"addNew": "Dodaj",
+			"noData": "Brak zapisanych monocykli",
+			"pageTitle": "Lista monocykli"
+		},
+		"form": {
+			"maxCharPH": "maks. 10 znaków",
+			"pricePLNPH": "wartość w PLN",
+			"minDiameterPH": "min. 10 cali",
+			"selectWaterproofPH": "Wybierz klasę wodoodporności",
+			"avParts": "Dostępne części",
+			"noAvParts": "Brak",
+			"add": {
+				"pageTitle": "Dodaj monocykl",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano monocykl"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edytuj monocykl",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano dane monocykla"
+				}
+			},
+			"details": {
+				"pageTitle": "Szczegóły monocykla"
+			}
+		}
+	},
+	"part": {
+		"fields": {
+			"name": "Nazwa",
+			"avQuantity": "Liczba sztuk",
+			"price": "Cena",
+			"type": "typ",
+			"types": {
+				"shell": "obudowa",
+				"tire": "opona",
+				"handle": "uchwyt",
+				"mudguard": "błotnik",
+				"bumper": "bumper",
+				"footPlate": "pedał"
+			}
+		},
+		"list": {
+			"title": "Części w magazynie",
+			"addNew": "Dodaj",
+			"noData": "Brak zapisanych części",
+			"forUniBrand": "Monocykl - firma",
+			"forUniModel": "Monocykl - model",
+			"pageTitle": "Lista Części"
+		},
+		"form": {
+			"forUni": "Dedykowana do monocykla",
+			"forUniName": "Monocykl",
+			"selectTypePH": "Wybierz typ części",
+			"selectUniPH": "Wybierz monocykl",
+			"maxCharPH": "Wpisz maks. 20 znaków",
+			"pricePLNPH": "Wartość w PLN",
+			"add": {
+				"pageTitle": "Dodaj część",
+				"btnLabel": "Zapisz",
+				"forUniPH": "Wybierz monocykl",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano część"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edytuj część",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano dane części"
+				}
+			},
+			"details": {
+				"pageTitle": "Szgzegóły części"
+			}
+		}
+	},
+	"as": {
+		"fields": {
+			"id": "Id montażu",
+			"price": "Cena",
+			"startDate": "Data rozpoczęcia",
+			"endDate": "Data zakończenia",
+			"clientName": "Imie klienta",
+			"clientNumber": "Numer tel. klienta",
+			"clientRemarks": "Uwagi klienta"
+		},
+		"list": {
+			"title": "Zlecone usługi montażu",
+			"addNew": "Dodaj",
+			"noData": "Brak zleconych usług montażu",
+			"unauthorized": "Zaloguj się aby wyświetlić usługi montażu",
+			"forUniBrand": "Monocykl - firma",
+			"forUniModel": "Monocykl - model",
+			"forPart": "Nazwa części",
+			"pageTitle": "Lista montażów"
+		},
+		"form": {
+			"refersTo": "Dotyczy",
+			"forUniName": "Monocykl",
+			"forPartName": "Nazwa częsci",
+			"selectPartPH": "Wybierz nazwę części",
+			"selectUniPH": "Wybierz monocykl",
+			"max25CharPH": "Wpisz maks. 25 znaków",
+			"max9CharPH": "Wpisz maks. 9 znaków",
+			"max100CharPH": "Wpisz maks. 100 znaków",
+			"pricePLNPH": "Wartość w PLN",
+			"add": {
+				"pageTitle": "Dodaj usługę montażu",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie dodano usługę montażu"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edytuj usługę montażu",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Pomyślnie zaktualizowano dane montażu"
+				}
+			},
+			"details": {
+				"pageTitle": "Szgzegóły montażu"
+			}
+		}
+	},
+	"login": {
+		"welcome": "login.welcome"
+	}
+}

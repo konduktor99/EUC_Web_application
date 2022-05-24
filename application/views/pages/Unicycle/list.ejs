@@ -1,0 +1,120 @@
+
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+
+    <h2> <%= __('uni.list.title') %></h2>
+    <% if (unis.length==0) { %>
+
+        <p> <%= __('uni.list.noData') %>.</p>
+    <% } else { %>  
+
+    <div class="table-wide">
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th> <%= __('uni.fields.brand') %> </th>
+                <th> <%= __('uni.fields.model') %> </th>
+                <th> <%= __('uni.fields.waterproofRat') %> </th>
+                <th> <%= __('uni.fields.price') %> </th>
+                <!-- <th> Liczba sztuk </th> -->
+                <!-- <th> Moc silnika </th> -->
+                <th> <%= __('uni.fields.battery') %> </th>
+                <th> <%= __('uni.fields.tireDiameter') %> </th>
+                <th> <%= __('list.actions.title') %> </th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <% for (let uni of unis) { %>
+            <tr>
+                <td><%= uni.brand %></td>
+                <td><%= uni.model %></td>
+                <td><%= uni.waterproofRating ? uni.waterproofRating : '-' %></td>
+                <td><%= uni.price %></td>
+                <!-- <td><%= uni.availableQuantity %></td> -->
+                <!-- <td><%= uni.motorPower %></td> -->
+                <td><%= uni.batteryCapacity %></td>
+                <td><%= uni.tireDiameter %></td>
+                <td>             
+                <ul class="list-actions">
+                    <li><a class="list-actions-button-details" href="/unicycles/details/<%=uni.idUnicycle%>"><i class="fas fa-info"></i></a> </li>
+                    <% if(loggedUser){ %>
+                    <li><a class="list-actions-button-edit" href="/unicycles/edit/<%=uni.idUnicycle%>"><i class="fas fa-edit"></i> </a> </li>
+                    <li><a class="list-actions-button-delete" href="/unicycles/delete/<%=uni.idUnicycle%>"><i class="far fa-trash-alt"></i> </a> </li>
+                    <% } %>
+                </ul>
+                </td>
+            </tr>
+              
+            <% } %>
+
+        </tbody>
+    </table>
+    </div>
+
+    <div class="table-narrow">
+        <table class="table-list">
+
+            <% for (let uni of unis) { %>
+
+            <tbody class="table-section">
+                <tr>
+                    <th> <%= __('uni.fields.brand') %> </th>
+                    <td><%= uni.brand %></td>
+                </tr>
+                <tr>   
+                    <th> <%= __('uni.fields.model') %> </th>
+                    <td><%= uni.model %></td>
+                </tr>
+                <!-- <tr>   
+                    <th> Klasa wodoodporności </th>
+                    <td><%= uni.waterproofRating ? uni.waterproofRating : '-' %></td>
+                </tr> -->
+                <tr>    
+                    <th> <%= __('uni.fields.price') %> </th>
+                    <td><%= uni.price %></td>
+                </tr>
+                <!-- <tr>    
+                    <th> Liczba sztuk </th>
+                    <td><%= uni.availableQuantity %></td>
+                </tr>     -->
+                <!-- <tr>
+                    <th> Moc silnika </th>
+                    <td><%= uni.motorPower %></td>
+                </tr> -->
+                <tr>    
+                    <th> <%= __('uni.fields.battery') %> </th>
+                    <td><%= uni.batteryCapacity %></td>
+                </tr>    
+                <tr>
+                    <th> <%= __('uni.fields.tireDiameter') %> </th>
+                    <td><%= uni.tireDiameter %></td>
+                </tr>
+                <tr>   
+                    <th> <%= __('list.actions.title') %> </th>
+                    <td>             
+                        <ul class="list-actions">
+                            <li><a class="list-actions-button-details" href="/unicycles/details/<%=uni.idUnicycle%>"><i class="fas fa-info"></i></a> </li>
+                            <% if(loggedUser){ %>
+                            <li><a class="list-actions-button-edit" href="/unicycles/edit/<%=uni.idUnicycle%>"><i class="fas fa-edit"></i> </a> </li>
+                            <li><a class="list-actions-button-delete" href="/unicycles/delete/<%=uni.idUnicycle%>"><i class="far fa-trash-alt"></i> </a> </li>
+                            <% } %>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+            
+            <% } %>
+            
+        </table>
+    </div>
+
+    <% } %>
+    <% if(loggedUser){ %>
+    <p class="paragraph-button-add"> <a class ="button-add" href="/unicycles/add"><i class="fas fa-plus"></i></a></p>
+    <% } %>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

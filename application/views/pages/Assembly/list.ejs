@@ -1,0 +1,125 @@
+<%- include('../../fragments/header.ejs') %>
+
+<main>
+
+    <h2> <%= __('as.list.title') %></h2>
+    <% if(!loggedUser){ %>
+        <p> <%= __('as.list.unauthorized') %>.</p>
+    <% }else{ %>    
+        <% if (assemblies.length==0) { %>
+
+            <p> <%= __('as.list.noData') %>.</p>
+        <% } else { %>    
+
+        <div class="table-wide">
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th> <%= __('as.fields.id') %> </th>
+                    <th> <%= __('as.list.forUniBrand') %> </th>
+                    <th> <%= __('as.list.forUniModel') %> </th>
+                    <th> <%= __('as.list.forPart') %> </th>
+                    <th> <%= __('as.fields.price') %> </th>
+                    <th> <%= __('as.fields.startDate') %> </th>
+                    <th> <%= __('as.fields.endDate') %> </th>
+                    <!-- <th> Imie klienta </th> -->
+                    <th> <%= __('list.actions.title') %> </th>
+
+                </tr>  
+            </thead>
+            <tbody>
+                <% for (let as of assemblies) { %>
+                <tr>
+                    <td> <%= as.idAssembly %> </td>
+                    <td> <%= as.unicycle.brand %> </td>
+                    <td> <%= as.unicycle.model %> </td>
+                    <td> <%= as.part.name %> </td>
+                    <td> <%= as.price %> </td>
+                    <td> <%= as.startDate.toISOString().split('T')[0] %></td>
+                    <td> <%= as.endDate.toISOString().split('T')[0] %> </td>
+                    <!-- <td> <%= as.clientName %></td> -->
+                    <td>     
+                        <ul class="list-actions">
+                            <li><a class="list-actions-button-details" href="/assemblies/details/<%= as.idAssembly %>"><i class="fas fa-info"></i></a> </li>
+                            <% if(loggedUser){ %>
+                            <li><a class="list-actions-button-edit" href="/assemblies/edit/<%= as.idAssembly %>"><i class="fas fa-edit"></i> </a> </li>
+                            <li><a class="list-actions-button-delete" href="/assemblies/delete/<%= as.idAssembly %>"><i class="far fa-trash-alt"></i> </a> </li>
+                            <% } %>
+                        </ul>            
+                    
+                    </td>
+                </tr>    
+                <% } %>
+            </tbody>
+        </table>
+        </div>
+        <div class="table-narrow">
+            <table class="table-list">
+                <tbody class="table-section">
+                    <% for (let as of assemblies) { %>
+                        <tr>
+                            <th> <%= __('as.fields.id') %> </th>
+                            <td> <%= as.idAssembly %> </td>
+                        </tr>
+                        <tr>    
+                            <th> <%= __('as.list.forUniBrand') %> </th>
+                            <td> <%= as.unicycle.brand %> </td>
+                        <tr></tr>    
+                        <tr>
+                            <th> <%= __('as.list.forUniModel') %> </th>
+                            <td> <%= as.unicycle.model %> </td>
+                        </tr> 
+                        <tr>   
+                            <th> <%= __('as.list.forPart') %> </th>
+                            <td> <%= as.part.name %> </td>
+                        </tr>
+                        <tr>   
+                            <th> <%= __('as.fields.price') %> </th>
+                            <td> <%= as.price %> </td>
+                        </tr>
+                        <tr>    
+                            <th> <%= __('as.fields.startDate') %> </th>
+                            <td> <%= as.startDate.toISOString().split('T')[0] %> </td>
+                        </tr>
+                        <tr>    
+                            <th> <%= __('as.fields.endDate') %> </th>
+                            <td> <%= as.endDate.toISOString().split('T')[0] %> </td>
+                        </tr> 
+                        <!-- <tr>                    
+                            <th> Uwagi klienta </th>
+                            <td> poprawić gwinty </td>
+                        </tr>    -->
+                        <tr>                   
+                            <th> <%= __('as.fields.clientName') %> </th>
+                            <td> <%= as.clientName %> </td>
+                        </tr>  
+                        <!-- <tr>                    
+                            <th> Telefon klienta </th>
+                            <td> <%= as.clientNumber %> </td>
+                        </tr>    -->
+                        <tr>   
+                            <th> <%= __('list.actions.title') %> </th>
+                            <td>             
+                                <ul class="list-actions">
+                                    <li><a class="list-actions-button-details" href="/assemblies/details/<%= as.idAssembly %>"><i class="fas fa-info"></i></a> </li>
+                                    <% if(loggedUser){ %>
+                                    <li><a class="list-actions-button-edit" href="/assemblies/edit/<%= as.idAssembly %>"><i class="fas fa-edit"></i> </a> </li>
+                                    <li><a class="list-actions-button-delete" href="/assemblies/delete/<%= as.idAssembly %>"><i class="far fa-trash-alt"></i> </a> </li>
+                                    <% } %>
+                                </ul>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>   
+
+        <% } %>    
+
+        <% if(loggedUser){ %>
+            <p class="paragraph-button-add"> <a class ="button-add" href="/assemblies/add"><i class="fas fa-plus"></i></a></p>
+            <% } %>
+    <% } %>
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

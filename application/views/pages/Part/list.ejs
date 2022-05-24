@@ -1,0 +1,106 @@
+<%- include('../../fragments/header.ejs') %>
+
+
+<main>
+
+    <h2> <%= __('part.list.title') %></h2>
+    <% if (parts.length==0) { %>
+        <p> <%= __('part.list.noData') %>.</p>
+    <% } else { %>  
+
+    <div class="table-wide">
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th> <%= __('part.fields.name') %> </th>
+                <th> <%= __('part.fields.price') %> </th>
+                <th> <%= __('part.fields.avQuantity') %> </th>
+                <!-- <th> Typ </th> -->
+                <th> <%= __('part.list.forUniBrand') %> </th>
+                <th> <%= __('part.list.forUniModel') %> </th>
+                <th>  <%= __('list.actions.title') %> </th>
+
+            </tr>
+
+
+        </thead>
+        <tbody>
+            <% for (let part of parts) { %>
+            <tr>
+                <td> <%= part.name %> </td>
+                <td> <%= part.price %> </td>
+                <td> <%= part.availableQuantity %> </td>
+                <!-- <td> <%= part.type %> </td> -->
+                <td> <%= part.unicycle.brand ? part.unicycle.brand : '-' %> </td>
+                <td> <%= part.unicycle.model ? part.unicycle.model : '-' %> </td>
+                <td>     
+                <ul class="list-actions">
+                    <li><a class="list-actions-button-details" href="/parts/details/<%= part.idPart %>"><i class="fas fa-info"></i></a> </li>
+                    <% if(loggedUser){ %>    
+                    <li><a class="list-actions-button-edit" href="/parts/edit/<%= part.idPart %>"><i class="fas fa-edit"></i> </a> </li>
+                    <li><a class="list-actions-button-delete" href="/parts/delete/<%= part.idPart %>"><i class="far fa-trash-alt"></i> </a> </li>
+                    <% } %>
+                </ul>            
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    </div>
+    <div class="table-narrow">
+        <table class="table-list">
+
+            <% for (let part of parts) { %>
+
+            <tbody class="table-section">
+                <tr>
+                    <th> <%= __('part.fields.name') %> </th>
+                    <td> <%= part.name %> </td>
+                </tr>
+                <!-- <tr>   
+                    <th> Cena </th>
+                    <td> <%= part.price %> </td>
+                </tr> -->
+                <tr>   
+                    <th> <%= __('part.fields.avQuantity') %> </th>
+                    <td> <%= part.availableQuantity %> </td>
+                </tr>
+                <!-- <tr>    
+                    <th> Typ </th>
+                    <td> <%= part.type %> </td>
+                </tr> -->
+                <tr>    
+                    <th> <%= __('part.list.forUniBrand') %> </th>
+                    <td> <%= part.unicycle.brand ? part.unicycle.brand : '-' %> </td>
+                </tr>    
+                <tr>
+                    <th> <%= __('part.list.forUniModel') %> </th>
+                    <td> <%= part.unicycle.model ? part.unicycle.model : '-' %> </td>
+                </tr>    
+                <tr>   
+                    <th> <%= __('list.actions.title') %> </th>
+                    <td>             
+                        <ul class="list-actions">
+                            <li><a class="list-actions-button-details" href="/parts/details/<%= part.idPart %>"><i class="fas fa-info"></i></a> </li>
+                            <% if(loggedUser){ %>
+                            <li><a class="list-actions-button-edit" href="/parts/edit/<%= part.idPart %>"><i class="fas fa-edit"></i> </a> </li>
+                            <li><a class="list-actions-button-delete" href="/parts/delete/<%= part.idPart %>"><i class="far fa-trash-alt"></i> </a> </li>
+                            <% } %>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+
+            <% } %>
+
+        </table>
+    </div>    
+
+    <% } %>
+    <% if(loggedUser){ %>
+        <p class="paragraph-button-add"> <a class ="button-add" href="/parts/add"><i class="fas fa-plus"></i></a></p>
+        <% } %>
+
+</main>
+
+<%- include('../../fragments/footer.ejs') %>

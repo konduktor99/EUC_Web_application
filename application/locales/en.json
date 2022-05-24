@@ -1,0 +1,202 @@
+{
+	"validationMessage": {
+		"fieldRequired": "Field is required.",
+		"25signs": "Field should contain max. 25 signs.",
+		"20signs": "Field should contain max. 20 signs.",
+		"9signs": "Field should contain max. 9 signs.",
+		"10signs": "Field should contain max. 10 signs.",
+		"price": "Price should be in range of 0-10000 PLN",
+		"dateFormat": "Date should be in dd-mm-yyyy format.",
+		"dateBefore": "Start date should be before end date.",
+		"datePast": "Date should be from the past.",
+		"sum": "The form contains errors."
+	},
+	"main-page": {
+		"header": "Main page",
+		"content": "Ekoło system is the tool supporting our company employees in managing of electric unicycles, their parts and assembly orders concerning above-mentioned ones. Have fun!"
+	},
+	"nav": {
+		"main-page": "Main page",
+		"unicycles": "Unicycles",
+		"parts": "Parts",
+		"assemblies": "Assemblies"
+	},
+	"auth": {
+		"headerLog": "Sign in",
+		"headerReg": "Register",
+		"login": "Login",
+		"password": "Password",
+		"btnTitle": "Sign in",
+		"welcome": "Hello,"
+	},
+	"list": {
+		"actions": {
+			"title": "Actions",
+			"details": "Details",
+			"edit": "Edit",
+			"delete": "Delete"
+		}
+	},
+	"form": {
+		"actions": {
+			"return": "Return",
+			"edit": "Edit",
+			"cancel": "Cancel"
+		}
+	},
+	"uni": {
+		"fields": {
+			"brand": "Brand",
+			"model": "Model",
+			"price": "Price",
+			"avQuantity": "Quantity",
+			"mPower": "Motor power (W)",
+			"battery": "Battery (Wh)",
+			"tireDiameter": "Wheel diameter",
+			"waterproofRat": "Waterproof Rating"
+		},
+		"list": {
+			"title": "Unicycles in warehouse",
+			"addNew": "Add",
+			"noData": "No unicycles saved",
+			"pageTitle": "Unicycles list"
+		},
+		"form": {
+			"maxCharPH": "max. 10 signs",
+			"pricePLNPH": "PLN value",
+			"minDiameterPH": "min. 10 inches",
+			"selectWaterproofPH": "Select IP Rating",
+			"avParts": "Related parts",
+			"noAvParts": "No related parts.",
+			"add": {
+				"pageTitle": "Add unicycle",
+				"btnLabel": "Save",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "Unicycle added succesfuly"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edit unicycle",
+				"btnLabel": "Save",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "Unicycle changes added succesfuly"
+				}
+			},
+			"details": {
+				"pageTitle": "Unicycle details"
+			}
+		}
+	},
+	"part": {
+		"fields": {
+			"name": "Name",
+			"avQuantity": "Quantity",
+			"price": "Price",
+			"type": "Type",
+			"types": {
+				"shell": "shell",
+				"tire": "tire",
+				"handle": "handle",
+				"mudguard": "mudguard",
+				"bumper": "bumper",
+				"footPlate": "footplate"
+			}
+		},
+		"list": {
+			"title": "Parts in warehouse",
+			"addNew": "Add",
+			"noData": "No parts saved",
+			"forUniBrand": "Unicycle - brand",
+			"forUniModel": "Unicycle - model",
+			"pageTitle": "Parts list"
+		},
+		"form": {
+			"forUni": "Dedicated for",
+			"forUniName": "Unicycle",
+			"selectTypePH": "Select part type",
+			"selectUniPH": "Select Unicycle",
+			"maxCharPH": "max. 20 signs",
+			"pricePLNPH": "PLN value",
+			"add": {
+				"pageTitle": "Add part",
+				"btnLabel": "Save",
+				"forUniPlaceholder": "Choose unicycle",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "Part added succesfuly"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edytuj część",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Potwierdzenie operacji",
+					"text": "Part changes added succesfuly"
+				}
+			},
+			"details": {
+				"pageTitle": "Part details"
+			}
+		}
+	},
+	"as": {
+		"fields": {
+			"id": "Id",
+			"price": "Price",
+			"startDate": "Start date",
+			"endDate": "End date",
+			"clientName": "Client's name",
+			"clientNumber": "Client's phone num.",
+			"clientRemarks": "Client's remarks"
+		},
+		"list": {
+			"title": "Assembly orders",
+			"addNew": "Add",
+			"noData": "No assembly orders saved",
+			"unauthorized": "Sign in to view assembly orders",
+			"forUniBrand": "Unicycle - brand",
+			"forUniModel": "Unicycle - model",
+			"forPart": "Part name",
+			"pageTitle": "Assemblies list"
+		},
+		"form": {
+			"refersTo": "Refers",
+			"forUniName": "Unicycle",
+			"forPartName": "Part name",
+			"selectPartPH": "Select part",
+			"selectUniPH": "Select unicycle",
+			"max25CharPH": "max. 25 signs",
+			"max9CharPH": "max. 9 signs",
+			"max100CharPH": "max. 100 signs",
+			"pricePLNPH": "PLN value",
+			"add": {
+				"pageTitle": "Add assembly order",
+				"btnLabel": "Save",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "Assembly order added succesfuly"
+				}
+			},
+			"edit": {
+				"pageTitle": "Edit assembly order",
+				"btnLabel": "Zapisz",
+				"confirm": {
+					"header": "Confirmation",
+					"text": "Assembly order changes added succesfuly"
+				}
+			},
+			"details": {
+				"pageTitle": "Assembly order details"
+			}
+		}
+	},
+	"parts": {
+		"fields": {
+			"name": "parts.fields.name",
+			"price": "parts.fields.price",
+			"avQuantity": "parts.fields.avQuantity"
+		}
+	}
+}

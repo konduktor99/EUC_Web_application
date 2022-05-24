@@ -1,0 +1,54 @@
+<footer>
+
+
+    <% if(!loggedUser) { %>
+        <div id="auth-wide">
+            <h3><%= __('auth.headerLog') %></h3>
+       
+        <form class="form-auth-narrow" method="post" action="/login" novalidate>
+
+            <label for="login"><%= __('auth.login') %>:</label>
+            <input type="text" id="login" name="login">
+            <span ></span>
+
+            <label for="password"><%= __('auth.password') %>:</label>
+            <input type="password" id="password" name="password">
+            <span></span>
+
+            
+            <button type="submit" title="<%= __('auth.btnTitle') %>" id="form-button-submit" class="form-button-submit"  ><i class="fas fa-sign-in-alt" ></i></button>
+            <span id="loginErrors"><%= loginError ? loginError : ''%></span>
+        </form>
+        </div>
+
+        <div id="auth-wide">
+            <h3><%= __('auth.headerReg') %></h3>
+           
+            <form class="form-auth-narrow" method="post" action="/register" novalidate>
+    
+                <label for="login"><%= __('auth.login') %>:</label>
+                <input type="text" id="login" name="login">
+                <span ></span>
+    
+                <label for="password"><%= __('auth.password') %>:</label>
+                <input type="password" id="password" name="password">
+                <span></span>
+
+                <button type="submit" title="<%= __('auth.btnTitle') %>" id="form-button-submit" class="form-button-submit"  ><i class="fas fa-marker" ></i></button>
+                <span id="loginErrors"> <%= registerError ? registerError : ''%> </span>
+    
+            </form>
+        </div>
+    <% } else { %>
+        
+        <h3><%= __('auth.welcome') %> <%= loggedUser.login %>!</h3>
+        <a href="/logout" title="wyloguj" class="form-button-logout"><i class="fas fa-sign-out-alt"></i></a>
+        
+        <% } %>
+   
+</footer>
+
+
+</body>
+
+</html>
